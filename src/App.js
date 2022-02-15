@@ -7,10 +7,18 @@ function App() {
 	const [purchases, setPurchases] = useState([]);
 
 	useEffect(() => {
-		axios.get("localhost:8000/purchases").then((res) => {
-			console.log(res.data);
-			setPurchases(res.data);
-		});
+		axios
+			.get("localhost:3001/purchases", {
+				mode: "no-cors",
+				headers: {
+					"Access-Control-Allow-Origin": "*",
+					"Content-Type": "application/json",
+				},
+			})
+			.then((res) => {
+				console.log(res.data);
+				setPurchases(res.data);
+			});
 	}, []);
 
 	const purchasesMarkUp = purchases.map((item, index) => (
