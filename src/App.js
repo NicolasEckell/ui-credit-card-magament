@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import "./App.css";
 import Purchase from "./Components/Purchase";
 
@@ -11,10 +10,40 @@ function App() {
 			method: "GET",
 		})
 			.then(function (r) {
-				r.json().then((data) => setPurchases(data));
+				r.json().then((data) => {
+					console.log(data);
+					setPurchases(data);
+				});
 			})
 			.catch((e) => console.log(e));
 	}, []);
+
+	const addNewItemHandler = () => {
+		var body = {
+			id: "2",
+			state: "Activo",
+			store_name: "ArmyTech2",
+			purchasing_date: "dic/20",
+			item_name: "Placa2",
+			total_amount: 60000,
+			bank: "Santander",
+			card: "Visa",
+		};
+		fetch("http://localhost:3001/purchases", {
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
+			},
+			method: "POST",
+			body: JSON.stringify(body),
+		})
+			.then(function (r) {
+				// r.json().then((data) => {
+				console.log(r);
+				// });
+			})
+			.catch((e) => console.log(e));
+	};
 
 	const purchasesMarkUp = purchases.map((item, index) => (
 		<Purchase
@@ -32,15 +61,13 @@ function App() {
 	return (
 		<div className="app">
 			{purchasesMarkUp}
-			<a
+			<button
 				className="add-button"
-				href="https://reactjs.org"
-				target="_blank"
-				rel="noopener noreferrer"
 				title="Add new purchase"
+				onClick={() => addNewItemHandler()}
 			>
 				+
-			</a>
+			</button>
 		</div>
 	);
 }
