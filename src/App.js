@@ -7,22 +7,18 @@ function App() {
 	const [purchases, setPurchases] = useState([]);
 
 	useEffect(() => {
-		axios
-			.get("localhost:3001/purchases", {
-				mode: "no-cors",
-				headers: {
-					"Access-Control-Allow-Origin": "*",
-					"Content-Type": "application/json",
-				},
+		fetch("http://localhost:3001/purchases", {
+			method: "GET",
+		})
+			.then(function (r) {
+				r.json().then((data) => setPurchases(data));
 			})
-			.then((res) => {
-				console.log(res.data);
-				setPurchases(res.data);
-			});
+			.catch((e) => console.log(e));
 	}, []);
 
 	const purchasesMarkUp = purchases.map((item, index) => (
 		<Purchase
+			key={item.id}
 			state={item.state}
 			store_name={item.store_name}
 			purchasing_date={item.purchasing_date}

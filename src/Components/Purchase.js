@@ -1,6 +1,6 @@
 import React from "react";
 
-function Purchase(props) {
+const Purchase = (props) => {
 	return (
 		<div className="card card-item">
 			<span>{props.state}</span>
@@ -12,6 +12,6 @@ function Purchase(props) {
 			<span>{props.card}</span>
 		</div>
 	);
-}
+};
 
 export default Purchase;
