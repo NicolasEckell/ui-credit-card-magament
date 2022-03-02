@@ -11,7 +11,6 @@ function App() {
 		})
 			.then(function (r) {
 				r.json().then((data) => {
-					console.log(data);
 					setPurchases(data);
 				});
 			})
@@ -45,9 +44,24 @@ function App() {
 			.catch((e) => console.log(e));
 	};
 
+	const deleteItemHandler = () => {
+		let id = "621ddd13809b57552fabfb7b";
+		fetch("http://localhost:3001/purchases/" + id, {
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
+			},
+			method: "DELETE",
+		})
+			.then(function (r) {
+				console.log(r);
+			})
+			.catch((e) => console.log(e));
+	};
+
 	const purchasesMarkUp = purchases.map((item, index) => (
 		<Purchase
-			key={item.id}
+			key={item._id}
 			state={item.state}
 			store_name={item.store_name}
 			purchasing_date={item.purchasing_date}
@@ -62,11 +76,18 @@ function App() {
 		<div className="app">
 			{purchasesMarkUp}
 			<button
-				className="add-button"
+				className="button add-button"
 				title="Add new purchase"
 				onClick={() => addNewItemHandler()}
 			>
 				+
+			</button>
+			<button
+				className="button delete-button"
+				title="Delete purchase"
+				onClick={() => deleteItemHandler()}
+			>
+				-
 			</button>
 		</div>
 	);
