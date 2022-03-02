@@ -1,4 +1,5 @@
 import React from "react";
+import "../App.css";
 
 const Purchase = (props) => {
 	return (
@@ -10,6 +11,13 @@ const Purchase = (props) => {
 			<span>{props.total_amount}</span>
 			<span>{props.bank}</span>
 			<span>{props.card}</span>
+			<button
+				className="button delete-button"
+				title="Delete purchase"
+				onClick={props.onDeleteClick}
+			>
+				-
+			</button>
 		</div>
 	);
 };

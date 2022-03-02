@@ -37,15 +37,14 @@ function App() {
 			body: JSON.stringify(body),
 		})
 			.then(function (r) {
-				// r.json().then((data) => {
-				console.log(r);
-				// });
+				r.text().then((data) => {
+					// console.log(data);
+				});
 			})
 			.catch((e) => console.log(e));
 	};
 
-	const deleteItemHandler = () => {
-		let id = "621ddd13809b57552fabfb7b";
+	const deleteItemHandler = (id) => {
 		fetch("http://localhost:3001/purchases/" + id, {
 			headers: {
 				Accept: "application/json",
@@ -54,7 +53,9 @@ function App() {
 			method: "DELETE",
 		})
 			.then(function (r) {
-				console.log(r);
+				r.text().then((data) => {
+					// console.log(data);
+				});
 			})
 			.catch((e) => console.log(e));
 	};
@@ -69,6 +70,7 @@ function App() {
 			total_amount={item.total_amount}
 			bank={item.bank}
 			card={item.card}
+			onDeleteClick={() => deleteItemHandler(item._id)}
 		/>
 	));
 
@@ -81,13 +83,6 @@ function App() {
 				onClick={() => addNewItemHandler()}
 			>
 				+
-			</button>
-			<button
-				className="button delete-button"
-				title="Delete purchase"
-				onClick={() => deleteItemHandler()}
-			>
-				-
 			</button>
 		</div>
 	);
