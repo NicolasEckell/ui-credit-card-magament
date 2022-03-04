@@ -1,16 +1,31 @@
 import React from "react";
-import "../App.css";
+import "./../styles/styles.scss";
+import "../App.scss";
+import "./Purchase.scss";
 
 const Purchase = (props) => {
 	return (
-		<div className="card card-item">
-			<span>{props.state}</span>
-			<span>{props.store_name}</span>
-			<span>{props.purchasing_date}</span>
-			<span>{props.item_name}</span>
-			<span>{props.total_amount}</span>
-			<span>{props.bank}</span>
-			<span>{props.card}</span>
+		<div className="card-container w-65">
+			<div className="card">
+				{/* <span className="card-prop">{props.state}</span> */}
+				<span className="card-prop it">{props.item_name}</span>
+				<span className="card-prop">{props.store_name}</span>
+				<span className="card-prop">{props.purchasing_date}</span>
+				<span className="card-prop">${props.total_amount}</span>
+				{props.active_quota !== undefined &&
+					props.total_quotas !== undefined && (
+						<span className="card-prop">
+							{props.active_quota}/{props.total_quotas}
+						</span>
+					)}
+				{props.quota_amount !== undefined && (
+					<span className="card-prop bold">
+						${props.quota_amount}
+					</span>
+				)}
+				<span className="card-prop">{props.bank}</span>
+				<span className="card-prop">{props.card}</span>
+			</div>
 			<button
 				className="button delete-button"
 				title="Delete purchase"

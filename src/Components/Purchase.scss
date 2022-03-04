@@ -1,0 +1,27 @@
+.card-container {
+	display: flex;
+	justify-items: center;
+
+	border-radius: 20px;
+	border: 2px solid #616161;
+	box-shadow: #676767 3px 5px 4px -2px;
+	padding: 5px 20px;
+	margin: 10px 20px;
+	background-color: #ddaeb6;
+}
+
+.card {
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
+
+	& > * {
+		font-size: 1.25rem;
+	}
+}
+
+.card-prop {
+	align-self: center;
+	margin: 0 5px;
+	text-align: right;
+}

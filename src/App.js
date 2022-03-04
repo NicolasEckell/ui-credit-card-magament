@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import "./App.css";
+import "./App.scss";
 import Purchase from "./Components/Purchase";
+import NewPurchase from "./Components/NewPurchase";
 
 function App() {
 	const [purchases, setPurchases] = useState([]);
+	const [enableNewPurchase, setEnableNewPurchases] = useState(false);
 
 	useEffect(() => {
 		fetch("http://localhost:3001/purchases", {
@@ -18,6 +20,11 @@ function App() {
 	}, []);
 
 	const addNewItemHandler = () => {
+		setEnableNewPurchases(true);
+	};
+
+	const pushNewItem = ({ item_name }) => {
+		console.log("asdasdasd", item_name);
 		var body = {
 			id: "2",
 			state: "Activo",
@@ -39,6 +46,7 @@ function App() {
 			.then(function (r) {
 				r.text().then((data) => {
 					// console.log(data);
+					setEnableNewPurchases(true);
 				});
 			})
 			.catch((e) => console.log(e));
@@ -74,16 +82,25 @@ function App() {
 		/>
 	));
 
+	const newPurchaseMarkUp = enableNewPurchase && (
+		<NewPurchase onSubmitPurchase={pushNewItem} />
+	);
+
+	const addButtonMarkUp = !enableNewPurchase && (
+		<button
+			className="button add-button"
+			title="Add new purchase"
+			onClick={() => addNewItemHandler()}
+		>
+			+
+		</button>
+	);
+
 	return (
 		<div className="app">
 			{purchasesMarkUp}
-			<button
-				className="button add-button"
-				title="Add new purchase"
-				onClick={() => addNewItemHandler()}
-			>
-				+
-			</button>
+			{newPurchaseMarkUp}
+			{addButtonMarkUp}
 		</div>
 	);
 }
