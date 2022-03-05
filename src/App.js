@@ -23,17 +23,21 @@ function App() {
 		setEnableNewPurchases(true);
 	};
 
-	const pushNewItem = ({ item_name }) => {
-		console.log("asdasdasd", item_name);
+	const pushNewItem = ({
+		item_name,
+		store_name,
+		purchasing_date,
+		total_amount,
+		card,
+		bank,
+	}) => {
 		var body = {
-			id: "2",
-			state: "Activo",
-			store_name: "ArmyTech2",
-			purchasing_date: "dic/20",
-			item_name: "Placa2",
-			total_amount: 60000,
-			bank: "Santander",
-			card: "Visa",
+			item_name: item_name,
+			store_name: store_name,
+			purchasing_date: purchasing_date,
+			total_amount: total_amount,
+			bank: card,
+			card: bank,
 		};
 		fetch("http://localhost:3001/purchases", {
 			headers: {
@@ -45,8 +49,8 @@ function App() {
 		})
 			.then(function (r) {
 				r.text().then((data) => {
-					// console.log(data);
-					setEnableNewPurchases(true);
+					console.log(data);
+					setEnableNewPurchases(false);
 				});
 			})
 			.catch((e) => console.log(e));

@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Formik } from "formik";
+import { Form, Formik, Field } from "formik";
 import "./../styles/styles.scss";
 import "../App.scss";
 import "./Purchase.scss";
@@ -11,8 +11,15 @@ const NewPurchase = (props) => {
 			validateOnBlur={true}
 			initialValues={{
 				item_name: "",
+				store_name: "",
+				purchasing_date: "",
+				total_amount: "",
+				bank: "",
+				card: "",
 			}}
-			onSubmit={props.onSubmitPurchase}
+			onSubmit={(values, actions) => {
+				props.onSubmitPurchase(values);
+			}}
 		>
 			{({
 				values,
@@ -27,40 +34,41 @@ const NewPurchase = (props) => {
 					<Form>
 						<div className="card-container">
 							<div className="card">
-								<input
+								<Field
+									id="item_name"
+									name="item_name"
 									type={"text"}
 									className="card-prop it"
-									name="item_name"
 								/>
-								<input
-									type={"text"}
-									className="card-prop"
+								<Field
+									id="store_name"
 									name="store_name"
-								/>
-								<input
 									type={"text"}
 									className="card-prop"
-									name="purchasing_date"
 								/>
-								<input
+								<Field
+									id="purchasing_date"
+									name="purchasing_date"
 									type={"text"}
 									className="card-prop"
-									name="purchasing_date"
 								/>
-								<input
+								<Field
+									id="total_amount"
+									name="total_amount"
 									type={"number"}
 									className="card-prop"
-									name="total_amount"
 								/>
-								<input
-									type={"text"}
-									className="card-prop"
+								<Field
+									id="card"
 									name="card"
-								/>
-								<input
 									type={"text"}
 									className="card-prop"
+								/>
+								<Field
+									id="bank"
 									name="bank"
+									type={"text"}
+									className="card-prop"
 								/>
 							</div>
 							<button
