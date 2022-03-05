@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.scss";
-import Purchase from "./Components/Purchase";
-import NewPurchase from "./Components/NewPurchase";
+import Purchase from "./Components/Purchase/Purchase";
+import NewPurchase from "./Components/Purchase/NewPurchase";
 
 function App() {
 	const [purchases, setPurchases] = useState([]);
@@ -49,8 +49,8 @@ function App() {
 		})
 			.then(function (r) {
 				r.text().then((data) => {
-					console.log(data);
-					setEnableNewPurchases(false);
+					if (r.status === 200) setEnableNewPurchases(false);
+					else if (r.status === 404) setEnableNewPurchases(false);
 				});
 			})
 			.catch((e) => console.log(e));

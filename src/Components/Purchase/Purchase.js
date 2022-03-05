@@ -1,13 +1,12 @@
 import React from "react";
-import "./../styles/styles.scss";
-import "../App.scss";
+import "./../../styles/styles.scss";
+import "../../App.scss";
 import "./Purchase.scss";
 
 const Purchase = (props) => {
 	return (
 		<div className="card-container w-65">
 			<div className="card">
-				{/* <span className="card-prop">{props.state}</span> */}
 				<span className="card-prop it">{props.item_name}</span>
 				<span className="card-prop">{props.store_name}</span>
 				<span className="card-prop">{props.purchasing_date}</span>

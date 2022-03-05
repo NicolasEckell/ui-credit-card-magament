@@ -1,7 +1,7 @@
 import React from "react";
 import { Form, Formik, Field } from "formik";
-import "./../styles/styles.scss";
-import "../App.scss";
+import "./../../styles/styles.scss";
+import "../../App.scss";
 import "./Purchase.scss";
 
 const NewPurchase = (props) => {
