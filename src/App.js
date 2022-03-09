@@ -2,12 +2,17 @@ import React, { useState, useEffect } from "react";
 import "./App.scss";
 import Purchase from "./Components/Purchase/Purchase";
 import NewPurchase from "./Components/Purchase/NewPurchase";
+import { Toast, useToast } from "./Components/Toast/Toast";
 
 function App() {
 	const [purchases, setPurchases] = useState([]);
 	const [enableNewPurchase, setEnableNewPurchases] = useState(false);
 
 	useEffect(() => {
+		loadData();
+	}, []);
+
+	const loadData = () => {
 		fetch("http://localhost:3001/purchases", {
 			method: "GET",
 		})
@@ -17,7 +22,7 @@ function App() {
 				});
 			})
 			.catch((e) => console.log(e));
-	}, []);
+	};
 
 	const addNewItemHandler = () => {
 		setEnableNewPurchases(true);
@@ -49,8 +54,13 @@ function App() {
 		})
 			.then(function (r) {
 				r.text().then((data) => {
-					if (r.status === 200) setEnableNewPurchases(false);
-					else if (r.status === 404) setEnableNewPurchases(false);
+					if (r.status === 201) {
+						useToast.success("Purchase created", "toast-gen");
+						setEnableNewPurchases(false);
+						loadData();
+					} else if (r.status === 404) {
+						useToast.error(JSON.parse(data)[0], "toast-gen");
+					}
 				});
 			})
 			.catch((e) => console.log(e));
@@ -66,11 +76,18 @@ function App() {
 		})
 			.then(function (r) {
 				r.text().then((data) => {
-					// console.log(data);
+					if (r.status === 204) {
+						useToast.warning("Purchase deleted", "toast-gen");
+						loadData();
+					} else if (r.status === 404) {
+						useToast.error(JSON.parse(data)[0], "toast-gen");
+					}
 				});
 			})
 			.catch((e) => console.log(e));
 	};
+
+	const toastGen = <Toast autoClose={3000} id="toast-gen" />;
 
 	const purchasesMarkUp = purchases.map((item, index) => (
 		<Purchase
@@ -102,6 +119,7 @@ function App() {
 
 	return (
 		<div className="app">
+			{toastGen}
 			{purchasesMarkUp}
 			{newPurchaseMarkUp}
 			{addButtonMarkUp}
