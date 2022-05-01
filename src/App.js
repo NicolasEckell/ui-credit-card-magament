@@ -6,6 +6,7 @@ import { Toast, useToast } from "./Components/Toast/Toast";
 
 function App() {
 	const [purchases, setPurchases] = useState([]);
+	const [total, setTotal] = useState(null);
 	const [enableNewPurchase, setEnableNewPurchases] = useState(false);
 
 	useEffect(() => {
@@ -17,8 +18,9 @@ function App() {
 			method: "GET",
 		})
 			.then(function (r) {
-				r.json().then((data) => {
-					setPurchases(data);
+				r.json().then((res) => {
+					setPurchases(res.data);
+					setTotal(res.total);
 				});
 			})
 			.catch((e) => console.log(e));
@@ -117,12 +119,19 @@ function App() {
 		</button>
 	);
 
+	const totalMarkUp = total !== null && (
+		<div className="total">
+			<label></label>Total a liquidar en este mes: ${total}
+		</div>
+	);
+
 	return (
 		<div className="app">
 			{toastGen}
 			{purchasesMarkUp}
 			{newPurchaseMarkUp}
 			{addButtonMarkUp}
+			{totalMarkUp}
 		</div>
 	);
 }
