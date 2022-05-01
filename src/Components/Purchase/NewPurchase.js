@@ -38,37 +38,43 @@ const NewPurchase = (props) => {
 									id="item_name"
 									name="item_name"
 									type={"text"}
-									className="card-prop it"
+									className="card-input"
+									placeholder="Nombre de la compra*"
 								/>
 								<Field
 									id="store_name"
 									name="store_name"
 									type={"text"}
-									className="card-prop"
+									className="card-input"
+									placeholder="Nombre del comercio*"
 								/>
 								<Field
 									id="purchasing_date"
 									name="purchasing_date"
 									type={"text"}
-									className="card-prop"
+									className="card-input"
+									placeholder="Fecha de compra* Formato: dic/20"
 								/>
 								<Field
 									id="total_amount"
 									name="total_amount"
 									type={"number"}
-									className="card-prop"
+									className="card-input"
+									placeholder="Precio final*"
 								/>
 								<Field
 									id="card"
 									name="card"
 									type={"text"}
-									className="card-prop"
+									className="card-input"
+									placeholder="Tarjeta Adquirente*"
 								/>
 								<Field
 									id="bank"
 									name="bank"
 									type={"text"}
-									className="card-prop"
+									className="card-input"
+									placeholder="Nombre del banco emisor*"
 								/>
 							</div>
 							<button
