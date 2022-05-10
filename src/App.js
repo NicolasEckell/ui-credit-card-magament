@@ -4,6 +4,8 @@ import Purchase from "./Components/Purchase/Purchase";
 import NewPurchase from "./Components/Purchase/NewPurchase";
 import { Toast, useToast } from "./Components/Toast/Toast";
 
+var api_url = process.env.REACT_APP_API_URL;
+
 function App() {
 	const [purchases, setPurchases] = useState([]);
 	const [total, setTotal] = useState(null);
@@ -14,7 +16,7 @@ function App() {
 	}, []);
 
 	const loadData = () => {
-		fetch("http://localhost:3001/purchases", {
+		fetch(api_url + "/purchases", {
 			method: "GET",
 		})
 			.then(function (r) {
@@ -46,7 +48,7 @@ function App() {
 			bank: card,
 			card: bank,
 		};
-		fetch("http://localhost:3001/purchases", {
+		fetch(api_url + "/purchases", {
 			headers: {
 				Accept: "application/json",
 				"Content-Type": "application/json",
@@ -69,7 +71,7 @@ function App() {
 	};
 
 	const deleteItemHandler = (id) => {
-		fetch("http://localhost:3001/purchases/" + id, {
+		fetch(api_url + "/purchases" + id, {
 			headers: {
 				Accept: "application/json",
 				"Content-Type": "application/json",
