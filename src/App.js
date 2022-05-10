@@ -89,6 +89,39 @@ function App() {
 			.catch((e) => console.log(e));
 	};
 
+	const generateResume = () => {
+		let out = [];
+		purchases.forEach((val) => {
+			out.push(
+				val.purchasing_date +
+					"\t\t" +
+					val.item_name +
+					"\t\t" +
+					val.store_name +
+					"\t\t" +
+					val.total_amount +
+					"\t\t" +
+					val.card +
+					"\t\t" +
+					val.bank
+			);
+			out.push("\n");
+		});
+		return out;
+	};
+
+	const downloadResume = () => {
+		const element = document.createElement("a");
+		const resume = generateResume();
+		const file = new Blob(resume, {
+			type: "text/plain",
+		});
+		element.href = URL.createObjectURL(file);
+		element.download = "resumen.txt";
+		document.body.appendChild(element);
+		element.click();
+	};
+
 	const toastGen = <Toast autoClose={3000} id="toast-gen" />;
 
 	const purchasesMarkUp = purchases.map((item, index) => (
@@ -120,8 +153,13 @@ function App() {
 	);
 
 	const totalMarkUp = total !== null && (
-		<div className="total">
-			<label></label>Total a liquidar en este mes: ${total}
+		<div className="mb-2">
+			<div className="total">
+				<label></label>Total a liquidar en este mes: ${total}
+			</div>
+			<button className="button download" onClick={downloadResume}>
+				Descargar resumen
+			</button>
 		</div>
 	);
 

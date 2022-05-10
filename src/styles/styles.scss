@@ -4,6 +4,12 @@
 	}
 }
 
+@for $i from 0 through 5 {
+	.mb-#{$i} {
+		margin-bottom: $i * 1em;
+	}
+}
+
 @import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 * {
