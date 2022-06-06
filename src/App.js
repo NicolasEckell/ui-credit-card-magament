@@ -98,9 +98,9 @@ function App() {
 			out.push(
 				val.purchasing_date +
 					"\t\t" +
-					val.item_name +
-					"\t\t" +
 					val.store_name +
+					"\t\t" +
+					val.item_name +
 					"\t\t" +
 					val.total_amount +
 					"\t\t" +
