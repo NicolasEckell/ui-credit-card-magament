@@ -18,6 +18,7 @@ function App() {
 	const loadData = () => {
 		fetch(api_url + "/purchases", {
 			method: "GET",
+			mode: 'cors'
 		})
 			.then(function (r) {
 				r.json().then((res) => {
@@ -71,7 +72,7 @@ function App() {
 	};
 
 	const deleteItemHandler = (id) => {
-		fetch(api_url + "/purchases" + id, {
+		fetch(api_url + "/purchases/" + id, {
 			headers: {
 				Accept: "application/json",
 				"Content-Type": "application/json",
