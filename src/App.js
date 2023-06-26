@@ -8,13 +8,14 @@ function App() {
 	const [purchases, setPurchases] = useState([]);
 	const [total, setTotal] = useState(null);
 	const [enableNewPurchase, setEnableNewPurchases] = useState(false);
+	const apiUrl = process.env.REACT_APP_SERVER;
 
 	useEffect(() => {
 		loadData();
 	}, []);
 
 	const loadData = () => {
-		fetch("http://localhost:3001/purchases", {
+		fetch(apiUrl + "purchases", {
 			method: "GET",
 		})
 			.then(function (r) {
@@ -46,7 +47,7 @@ function App() {
 			bank: card,
 			card: bank,
 		};
-		fetch("http://localhost:3001/purchases", {
+		fetch(apiUrl + "purchases", {
 			headers: {
 				Accept: "application/json",
 				"Content-Type": "application/json",
@@ -69,7 +70,7 @@ function App() {
 	};
 
 	const deleteItemHandler = (id) => {
-		fetch("http://localhost:3001/purchases/" + id, {
+		fetch(apiUrl + "purchases/" + id, {
 			headers: {
 				Accept: "application/json",
 				"Content-Type": "application/json",
