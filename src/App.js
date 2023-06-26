@@ -17,6 +17,7 @@ function App() {
 	const loadData = () => {
 		fetch(apiUrl + "purchases", {
 			method: "GET",
+			mode: "cors",
 		})
 			.then(function (r) {
 				r.json().then((res) => {
@@ -96,9 +97,9 @@ function App() {
 			out.push(
 				val.purchasing_date +
 					"\t\t" +
-					val.item_name +
-					"\t\t" +
 					val.store_name +
+					"\t\t" +
+					val.item_name +
 					"\t\t" +
 					val.total_amount +
 					"\t\t" +
